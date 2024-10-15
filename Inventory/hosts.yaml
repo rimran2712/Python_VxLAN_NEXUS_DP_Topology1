@@ -1,0 +1,31 @@
+---
+
+SP01:
+    hostname: 172.16.100.2
+    groups:
+        - nexus_group
+
+SP02:
+    hostname: 172.16.100.6
+    groups:
+        - nexus_group
+
+LEAF01:
+    hostname: 172.16.100.10
+    groups:
+        - nexus_group
+
+LEAF02:
+    hostname: 172.16.100.14
+    groups:
+        - nexus_group
+
+LEAF03:
+    hostname: 172.16.100.18
+    groups:
+        - nexus_group
+
+#vIOS-RTR:
+#    hostname: 172.16.100.22
+#    groups:
+#        - cisco_group

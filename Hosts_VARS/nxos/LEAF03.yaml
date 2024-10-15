@@ -1,0 +1,39 @@
+---
+spine: False
+mtu: 9216
+
+interfaces:
+    - name: lo0 #Used for OSPF RID & VTEP/VNI Tunnel Source Address
+      ip: 10.5.1.1
+      mask: 255.255.255.255
+      switchport: False
+      ospf_area: 0
+    - name: Eth1/1 # To SP-01
+      ip: 172.16.50.10
+      mask: 255.255.255.252
+      switchport: True
+      ospf_area: 0
+    - name: Eth1/2 # To SP-02
+      ip: 172.16.50.22
+      mask: 255.255.255.252
+      switchport: True
+      ospf_area: 0
+        
+ospf:
+    rid: 10.5.1.1
+    proc_id: 127
+trunk_exist: True
+trunk_interface:
+    - name: "Eth1/3"
+      allowed_vlan: "10, 20" 
+vlans:
+    - vlan_id: 10
+      vxlan_support: True
+      vni: 10010
+      host_exist: True
+      interfaces:
+          - Eth1/4
+    - vlan_id: 20
+      vxlan_support: True
+      vni: 10020
+      host_exist: False
