@@ -24,8 +24,3 @@ LEAF03:
     hostname: 172.16.100.18
     groups:
         - nexus_group
-
-#vIOS-RTR:
-#    hostname: 172.16.100.22
-#    groups:
-#        - cisco_group

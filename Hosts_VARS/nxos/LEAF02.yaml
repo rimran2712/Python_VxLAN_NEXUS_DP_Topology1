@@ -1,40 +1,37 @@
 ---
-spine: False
-mtu: 9216
+
+device_type: "leaf"
 
 interfaces:
     - name: lo0 #Used for OSPF RID & VTEP/VNI Tunnel Source Address
       ip: 10.4.1.1
       mask: 255.255.255.255
-      switchport: False
+      int_type: "loopback"
       ospf_area: 0
     - name: Eth1/1 # To SP-01
       ip: 172.16.50.6
       mask: 255.255.255.252
-      switchport: True
+      int_type: "layer3"
       ospf_area: 0
     - name: Eth1/2 # To SP-02
       ip: 172.16.50.18
       mask: 255.255.255.252
-      switchport: True
+      int_type: "layer3"
       ospf_area: 0
-        
+    - name: Eth1/3 # To vPC3-VLAN20 & VNI 10020
+      vlan_id: 20
+      int_type: "access"
+    - name: nve1 # VTEP/NVE interface used to connect VxLAN overlay (VNI) with underlay
+      int_type: "vtep"
+      vtep_src: lo0
+      members:
+          - vni: 10020
+            mcast_group: 239.0.20.1
 ospf:
     rid: 10.4.1.1
     proc_id: 127
 
 vlans:
-    - vlan_id: 10
-      vxlan_support: True
-      vni: 10010
-      host_exist: True
-      interfaces:
-          - Eth1/4
     - vlan_id: 20
-      vxlan_support: True
-      vni: 10020
-      host_exist: True
-      interfaces:
-          - Eth1/3
-
-trunk_exist: False
+      vni: True
+      vni_id: 10020
